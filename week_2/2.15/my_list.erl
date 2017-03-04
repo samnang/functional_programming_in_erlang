@@ -2,15 +2,18 @@
 -export([palindrome/1]).
 
 palindrome(X) ->
-  SanitizedText = sanitizeText(X),
+  SanitizedText = cleanUpSpecialChars(lowerCase(X)),
   SanitizedText =:= reverseString(SanitizedText).
 
-sanitizeText(X) -> sanitizeText(X, []).
-sanitizeText([], Acc) -> Acc;
-sanitizeText([H|T], Acc) ->
-  case (H >= 65) andalso (H =< 122) of
-    true  -> sanitizeText(T, Acc ++ [string:to_lower(H)]);
-    _ -> sanitizeText(T, Acc)
+lowerCase(X) ->
+  string:to_lower(X).
+
+cleanUpSpecialChars(X) -> cleanUpSpecialChars(X, []).
+cleanUpSpecialChars([], Acc) -> reverseString(Acc);
+cleanUpSpecialChars([H|T], Acc) ->
+  case (H >= $A) andalso (H =< $z) of
+    true -> cleanUpSpecialChars(T, [H | Acc]);
+    _    -> cleanUpSpecialChars(T, Acc)
   end.
 
 reverseString(X) -> reverseString(X, []).
