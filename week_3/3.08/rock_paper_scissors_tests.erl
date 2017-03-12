@@ -27,3 +27,8 @@ tournament2_test() ->
   ?assertEqual(-1, rock_paper_scissors:tournament2([rock,rock,paper,paper],[rock,paper,scissors,rock])),
   ?assertEqual(0, rock_paper_scissors:tournament2([rock,rock,paper],[paper,scissors,paper])),
   ?assertEqual(1, rock_paper_scissors:tournament2([rock,paper,scissors,rock],[rock,rock,paper,paper])).
+
+tournamentWinner_test() ->
+  ?assertEqual(right, rock_paper_scissors:tournamentWinner([rock,rock,paper,paper],[rock,paper,scissors,rock])),
+  ?assertEqual(draw, rock_paper_scissors:tournamentWinner([rock,rock,paper],[paper,scissors,paper])),
+  ?assertEqual(left, rock_paper_scissors:tournamentWinner([rock,paper,scissors,rock],[rock,rock,paper,paper])).
